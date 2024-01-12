@@ -8,7 +8,7 @@
     tools:context=".ui.PhotosFragment">
 
     <RelativeLayout
-        android:id="@+id/layout_details"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
@@ -35,6 +35,37 @@
             android:rotation="180"
             android:src="@drawable/arrow_forward" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search"
+            android:id="@+id/btn_search"
+            android:padding="@dimen/_10ssp"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            android:id="@+id/layout_search"
+            android:layout_margin="@dimen/_7ssp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/txt_search"
+                android:textSize="@dimen/_10ssp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -50,5 +81,4 @@
         app:spanCount="2"
         tools:itemCount="7"
         tools:listitem="@layout/photo_item" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

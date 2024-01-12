@@ -2,6 +2,7 @@ package com.mkandeel.gallery.Adapter;
 
 import static com.mkandeel.gallery.Helper.Constants.IMAGE_DATA;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.mkandeel.gallery.Helper.ClickListener;
 import com.mkandeel.gallery.R;
 import com.mkandeel.gallery.data.Photos;
+import com.mkandeel.gallery.ui.PhotosFragment;
 
 import java.util.List;
 
@@ -55,6 +57,12 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void filteredList(List<Photos> mlist) {
+        list = mlist;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

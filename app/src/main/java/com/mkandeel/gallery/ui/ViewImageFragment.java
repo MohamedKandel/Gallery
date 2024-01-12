@@ -64,7 +64,7 @@ public class ViewImageFragment extends Fragment {
                 helper.navigate(R.id.photosFragment, getArguments());
             });
 
-            helper.onBackPressed(R.id.profileFragment, getArguments());
+            helper.onBackPressed(R.id.photosFragment, getArguments());
         }
 
         return binding.getRoot();

@@ -15,6 +15,8 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +60,7 @@ public class PhotosFragment extends Fragment implements ClickListener {
     private Albums albums;
     private Helper helper;
     private PhotosViewModel photosViewModel;
+    private boolean isVisible;
 
 
     @Override
@@ -66,6 +69,7 @@ public class PhotosFragment extends Fragment implements ClickListener {
         // Inflate the layout for this fragment
         binding = FragmentPhotosBinding.inflate(inflater, container, false);
         helper = Helper.getInstance(this);
+        isVisible = false;
         photosViewModel = new ViewModelProvider(this).get(PhotosViewModel.class);
 
         if (getArguments() != null) {
@@ -84,11 +88,54 @@ public class PhotosFragment extends Fragment implements ClickListener {
             adapter = new PhotoAdapter(list, this, requireContext());
             binding.recyclerViewPhotos.setAdapter(adapter);
 
+            binding.layoutDetails.setVisibility(View.GONE);
+            binding.btnSearch.setImageResource(R.drawable.search);
+
+            binding.btnSearch.setOnClickListener(view -> {
+                if (isVisible) {
+                    binding.layoutDetails.setVisibility(View.GONE);
+                    isVisible = false;
+                    binding.btnSearch.setImageResource(R.drawable.search);
+                } else {
+                    binding.layoutDetails.setVisibility(View.VISIBLE);
+                    isVisible = true;
+                    binding.btnSearch.setImageResource(R.drawable.close);
+                }
+            });
+
+            binding.txtSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    filter(s.toString());
+                }
+            });
+
             getPhotos(albums.getId());
         }
 
 
         return binding.getRoot();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void filter(String query) {
+        List<Photos> mlist = new ArrayList<>();
+        for (Photos photo : list) {
+            if (photo.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                mlist.add(photo);
+            }
+        }
+        adapter.filteredList(mlist);
     }
 
     private void getPhotos(int album_id) {
