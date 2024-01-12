@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.ProfileFragment">
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_7ssp"
+        android:layout_marginTop="@dimen/_7ssp"
+        android:layout_marginEnd="@dimen/_7ssp"
+        android:layout_marginBottom="@dimen/_7ssp"
+        android:textSize="@dimen/_18ssp" />
+
+
+    <TextView
+        android:id="@+id/txt_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_7ssp"
+        android:layout_marginTop="@dimen/_7ssp"
+        android:layout_marginEnd="@dimen/_7ssp"
+        android:layout_marginBottom="@dimen/_7ssp"
+        android:textSize="@dimen/_18ssp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_albums"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/txt_address"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/_7ssp"
+        tools:itemCount="6"
+        android:layout_marginTop="@dimen/_10ssp"
+        tools:listitem="@layout/albums_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</RelativeLayout>
