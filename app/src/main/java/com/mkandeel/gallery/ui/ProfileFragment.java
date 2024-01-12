@@ -6,6 +6,7 @@ import static com.mkandeel.gallery.Helper.Constants.USER_DATA;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -85,6 +86,8 @@ public class ProfileFragment extends Fragment implements ClickListener {
             getAlbumsForUser(albums.getUserId());
         }
 
+        onBackPressed();
+
         return binding.getRoot();
     }
 
@@ -132,5 +135,15 @@ public class ProfileFragment extends Fragment implements ClickListener {
     @Override
     public void onItemLongClickListener(int position, @Nullable Bundle extras) {
 
+    }
+
+    private void onBackPressed() {
+        requireActivity().getOnBackPressedDispatcher()
+                .addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        getActivity().finish();
+                    }
+                });
     }
 }
